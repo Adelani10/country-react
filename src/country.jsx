@@ -16,15 +16,15 @@ export default function Country(props) {
     if(props.isInfoShown === false){
          return (
              <article onClick={handleInitialClick}
-                      className={`h-64 shadow-md w-[75%] mx-auto ${!props.darkMode && 'border'} ${props.darkMode && 'bg-darkModeElements'} ${show === true ? 'hidden': ''}`}>
-                    <img src={props.flag} alt="flag" className="w-full object-cover h-[40%] " />
-                    <div className="space-y-3 h-[65%] flex flex-col p-2 justify-center">
-                        <h1 className="font-semibold text-sm">
+                      className={`h-64 shadow-md w-full ${!props.darkMode && 'border'} ${props.darkMode && 'bg-darkModeElements'} ${show === true ? 'hidden': ''}`}>
+                    <img src={props.flag} alt="flag" className="w-full object-cover h-[60%] " />
+                    <div className="space-y-3 h-[40%] flex flex-col p-2 justify-center">
+                        <h1 className="font-bold text-sm">
                             {props.name}
                         </h1>
-                        <section className="text-xs md:text-sm space-y-2">
+                        <section className="text-xs md:text-sm space-y-1">
                             <h2 className="">
-                                Population : <span className="text-lightModeInput"> {props.population}</span>
+                                Population :<span className="text-lightModeInput"> {props.population}</span>
                             </h2>
                             <h2 className="">
                                 Region : <span className="text-lightModeInput"> {props.region}</span>

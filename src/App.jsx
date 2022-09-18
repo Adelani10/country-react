@@ -94,7 +94,7 @@ function App() {
                 : 'text-lightModeText bg-lightModeBackground' }
                     space-y-4 container mx-auto min-h-screen`}>
 
-      <nav className={`flex px-2
+      <nav className={`flex px-4
                   ${darkMode ? 'bg-darkModeElements' : 'bg-darkModeTextAndLightModeElements' } 
                   justify-between items-center shadow-md h-20`} >
             <h1 className="font-bold">
@@ -108,7 +108,7 @@ function App() {
             </button>
         </nav>
 
-      <section className='px-6 flex flex-col space-y-6 pb-4 relative'>
+      <section className='px-4 flex flex-col space-y-6 pb-4 relative'>
         <form 
             onSubmit={searchCountry}
             className='w-full md:w-[50%] flex items-center rounded-md shadow-md'>
@@ -123,15 +123,15 @@ function App() {
 
 
             <input 
-            type="text"
+                type="text"
                 value={name}
                 onChange={(event) => setName(event.target.value)}   
-                placeholder='Search for a Country'
+                placeholder='Search (Capitalize first letter)'
                 className={`text-lightModeInput ${restart ? 'w-[70%]' : 'w-[80%]'} ${darkMode && 'bg-darkModeElements'} capitalize px-2 ${!darkMode && 'border-y-2 border-l-2'} ${!restart && 'rounded-l-md'} h-12`} />
 
             <button type="submit" className={`w-[20%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-r-md bg-sky-300`}>Enter</button>
         </form>
-            <main className="md:grid grid-cols-4 px-8 gap-6 rounded-md space-y-6 md:space-y-0">
+            <main className="md:grid grid-cols-4 gap-6 rounded-md space-y-6 md:space-y-0">
               {elements}
             </main>
       </section>
