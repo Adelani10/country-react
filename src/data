@@ -1,0 +1,250 @@
+{
+    "name": {
+        "common": "South Korea",
+        "official": "Republic of Korea",
+        "nativeName": {
+            "kor": {
+                "official": "대한민국",
+                "common": "한국"
+            }
+        }
+    },
+    "tld": [
+        ".kr",
+        ".한국"
+    ],
+    "cca2": "KR",
+    "ccn3": "410",
+    "cca3": "KOR",
+    "cioc": "KOR",
+    "independent": true,
+    "status": "officially-assigned",
+    "unMember": true,
+    "currencies": {
+        "KRW": {
+            "name": "South Korean won",
+            "symbol": "₩"
+        }
+    },
+    "idd": {
+        "root": "+8",
+        "suffixes": [
+            "2"
+        ]
+    },
+    "capital": [
+        "Seoul"
+    ],
+    "altSpellings": [
+        "KR",
+        "Korea, Republic of",
+        "Republic of Korea",
+        "남한",
+        "남조선"
+    ],
+    "region": "Asia",
+    "subregion": "Eastern Asia",
+    "languages": {
+        "kor": "Korean"
+    },
+    "translations": {
+        "ara": {
+            "official": "جمهورية كوريا",
+            "common": "كوريا الجنوبية"
+        },
+        "bre": {
+            "official": "Republik Korea",
+            "common": "Korea ar Su"
+        },
+        "ces": {
+            "official": "Korejská republika",
+            "common": "Jižní Korea"
+        },
+        "cym": {
+            "official": "Republic of Korea",
+            "common": "South Korea"
+        },
+        "deu": {
+            "official": "Republik Korea",
+            "common": "Südkorea"
+        },
+        "est": {
+            "official": "Korea Vabariik",
+            "common": "Lõuna-Korea"
+        },
+        "fin": {
+            "official": "Korean tasavalta",
+            "common": "Etelä-Korea"
+        },
+        "fra": {
+            "official": "République de Corée",
+            "common": "Corée du Sud"
+        },
+        "hrv": {
+            "official": "Republika Koreja",
+            "common": "Južna Koreja"
+        },
+        "hun": {
+            "official": "Koreai Köztársaság",
+            "common": "Dél-Korea"
+        },
+        "ita": {
+            "official": "Repubblica di Corea",
+            "common": "Corea del Sud"
+        },
+        "jpn": {
+            "official": "大韓民国",
+            "common": "韓国"
+        },
+        "kor": {
+            "official": "대한민국",
+            "common": "한국"
+        },
+        "nld": {
+            "official": "Republiek Korea",
+            "common": "Zuid-Korea"
+        },
+        "per": {
+            "official": "جمهوری کره",
+            "common": "کرهٔ جنوبی"
+        },
+        "pol": {
+            "official": "Republika Korei",
+            "common": "Korea Południowa"
+        },
+        "por": {
+            "official": "República da Coreia",
+            "common": "Coreia do Sul"
+        },
+        "rus": {
+            "official": "Республика Корея",
+            "common": "Южная Корея"
+        },
+        "slk": {
+            "official": "Kórejská republika",
+            "common": "Južná Kórea"
+        },
+        "spa": {
+            "official": "República de Corea",
+            "common": "Corea del Sur"
+        },
+        "swe": {
+            "official": "Republiken Korea",
+            "common": "Sydkorea"
+        },
+        "urd": {
+            "official": "جمہوریہ کوریا ",
+            "common": "جنوبی کوریا"
+        },
+        "zho": {
+            "official": "大韩民国",
+            "common": "韩国"
+        }
+    },
+    "latlng": [
+        37,
+        127.5
+    ],
+    "landlocked": false,
+    "borders": [
+        "PRK"
+    ],
+    "area": 100210,
+    "demonyms": {
+        "eng": {
+            "f": "South Korean",
+            "m": "South Korean"
+        },
+        "fra": {
+            "f": "Sud-coréenne",
+            "m": "Sud-coréen"
+        }
+    },
+    "flag": "🇰🇷",
+    "maps": {
+        "googleMaps": "https://goo.gl/maps/7ecjaJXefjAQhxjGA",
+        "openStreetMaps": "https://www.openstreetmap.org/relation/307756"
+    },
+    "population": 51780579,
+    "gini": {
+        "2016": 31.4
+    },
+    "fifa": "KOR",
+    "car": {
+        "signs": [
+            "ROK"
+        ],
+        "side": "right"
+    },
+    "timezones": [
+        "UTC+09:00"
+    ],
+    "continents": [
+        "Asia"
+    ],
+    "flags": {
+        "png": "https://flagcdn.com/w320/kr.png",
+        "svg": "https://flagcdn.com/kr.svg"
+    },
+    "coatOfArms": {
+        "png": "https://mainfacts.com/media/images/coats_of_arms/kr.png",
+        "svg": "https://mainfacts.com/media/images/coats_of_arms/kr.svg"
+    },
+    "startOfWeek": "monday",
+    "capitalInfo": {
+        "latlng": [
+            37.55,
+            126.98
+        ]
+    },
+    "postalCode": {
+        "format": "SEOUL ###-###",
+        "regex": "^(?:SEOUL)*(\\d{6})$"
+    }
+}
+
+<div className={`${props.darkMode ? 'bg-darkModeElements' : 'bg-darkModeTextAndLightModeElements'}   overflow-hidden absolute w-full top-0 h-screen left-0 right-0 space-y-12 p-12 md:p-24`}>
+                    <button 
+                            onClick={props.reset}
+                            className="px-8 py-1 space-x-2 flex items-center border-2 hover:bg-sky-200">
+                        <i className="fa-solid fa-arrow-left-long"></i>
+                        <p>Back</p>
+                    </button>
+
+                    <section className="flex flex-col md:items-center md:flex-row md:space-x-8 space-y-10 md:space-y-0">
+
+                        <img src={props.flag} alt="" className="md:w-1/2 w-full h-64 md:h-72 object-cover shadow-md" />
+
+
+                        <div className="text-sm md:w-1/2 w-full space-y-6 py-2">
+                            <h1 className="font-bold text-2xl md:text-4xl">
+                                {props.name}
+                            </h1>
+                            <article className="flex flex-col md:flex-row md:justify-between space-y-4 md:space-y-0">
+                                    <div className="space-y-1">
+                                        <h3>Native Name : <span className={`${props.darkMode ? 'text-darkModeTextAndLightModeElements' : 'text-lightModeInput'}`}>{props.nativeName}</span></h3>
+                                        <h3>Population : <span className={`${props.darkMode ? 'text-darkModeTextAndLightModeElements' : 'text-lightModeInput'}`}>{props.population}</span></h3>
+                                        <h3>Region : <span className={`${props.darkMode ? 'text-darkModeTextAndLightModeElements' : 'text-lightModeInput'}`}>{props.region}</span></h3>
+                                        <h3>Sub Region : <span className={`${props.darkMode ? 'text-darkModeTextAndLightModeElements' : 'text-lightModeInput'}`}>{props.subregion}</span></h3>
+                                        <h3>Capital : <span className={`${props.darkMode ? 'text-darkModeTextAndLightModeElements' : 'text-lightModeInput'}`}>{props.capital}</span></h3>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <h3>Top Level Domain : <span className={`${props.darkMode ? 'text-darkModeTextAndLightModeElements' : 'text-lightModeInput'}`}>{props.topLevel}</span></h3>
+                                        <h3>Currency : <span className={`${props.darkMode ? 'text-darkModeTextAndLightModeElements' : 'text-lightModeInput'}`}></span></h3>
+                                        <h3>Languages : <span className={`${props.darkMode ? 'text-darkModeTextAndLightModeElements' : 'text-lightModeInput'}`}></span></h3>
+                                    </div>
+                                    
+                            </article>
+
+                            <h3 className="w-full">Border Countries : 
+                                <span className="text-darkModeTextAndLightModeElements capitalize px-3 py-1 mx-2">
+                                {props.borderCountries && props.borderCountries.length > 1 ?  props.borderCountries.join(' , '): props.borderCountries ?  props.borderCountries : ''}</span>
+                            </h3>
+                        </div>
+
+                    </section>
+                </div>
+
+
+
+                ${show === true ? 'hidden': ''}
