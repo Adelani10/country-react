@@ -131,7 +131,7 @@ function App() {
 
             <button type="submit" className={`w-[20%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-r-md bg-sky-300`}>Enter</button>
         </form>
-            <main className="md:grid grid-cols-4 gap-6 rounded-md space-y-6 md:space-y-0">
+            <main className="md:grid grid-cols-4 gap-6 rounded-md space-y-8 md:space-y-0">
               {elements}
             </main>
       </section>
