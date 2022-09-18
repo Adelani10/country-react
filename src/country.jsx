@@ -16,7 +16,7 @@ export default function Country(props) {
     if(props.isInfoShown === false){
          return (
              <article onClick={handleInitialClick}
-                      className={`h-64 shadow-md w-[75%] mx-auto border ${props.darkMode && 'bg-darkModeElements'} ${show === true ? 'hidden': ''}`}>
+                      className={`h-64 shadow-md w-[75%] mx-auto ${!props.darkMode && 'border'} ${props.darkMode && 'bg-darkModeElements'} ${show === true ? 'hidden': ''}`}>
                     <img src={props.flag} alt="flag" className="w-full object-cover h-[40%] " />
                     <div className="space-y-3 h-[65%] flex flex-col p-2 justify-center">
                         <h1 className="font-semibold text-sm">

@@ -7,26 +7,27 @@ function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [countriesData, setCountriesData] = useState([])
   const [name, setName] = useState("")
+  const [restart, setRestart] = useState(false)
 
   useEffect(()=> {
-    fetch('https://restcountries.com/v3.1/all')
-    .then(res=> res.json())
-    .then(data => setCountriesData(data.map(item=> {
-      return {
-        id: nanoid(),
-        name: item.name.common,
-        nativeName: item.name.official,
-        population: item.population,
-        region: item.region,
-        capital: item.capital,
-        subregion: item.subregion,
-        flag: item.flags.svg,
-        topLevel: item.tld,
-        borderCountries: item.borders,
-        isInfoShown: false
+    if(!restart){fetch('https://restcountries.com/v3.1/all')
+                  .then(res=> res.json())
+                  .then(data => setCountriesData(data.map(item=> {
+                    return {
+                      id: nanoid(),
+                      name: item.name.common,
+                      nativeName: item.name.official,
+                      population: item.population,
+                      region: item.region,
+                      capital: item.capital,
+                      subregion: item.subregion,
+                      flag: item.flags.svg,
+                      topLevel: item.tld,
+                      borderCountries: item.borders,
+                      isInfoShown: false
       }
     })))
-  }, [])
+  }}, [restart])
 
   const elements = countriesData.map((item, index) => {
     return <Country id={item.id}
@@ -76,14 +77,16 @@ function App() {
 
   function searchCountry (event) {
     event.preventDefault()
+    setRestart(true)
       const newData = countriesData.filter(item => {
       if(item.name == name){
-        console.log(name)
         return item
       }
     })
     setCountriesData(newData)
   }
+
+  console.log(name)
 
   return (
     <div className={`App 
@@ -108,14 +111,25 @@ function App() {
       <section className='px-6 flex flex-col space-y-6 pb-4 relative'>
         <form 
             onSubmit={searchCountry}
-            className='w-full md:w-[50%] flex items-center'>
+            className='w-full md:w-[50%] flex items-center rounded-md shadow-md'>
+
+
+             {restart && <button 
+                  onClick={()=> {setRestart(false)
+                                    setName('')}} 
+                  className={`w-[10%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-l-md bg-red-600`}>
+                    <i className="fa-solid fa-angle-left"></i>
+            </button> }
+
+
             <input 
             type="text"
-            value={name}
-            onChange={(event) => setName(event.target.value)}   
-            placeholder='Search for a Country'
-            className=" text-lightModeInput w-[80%] shadow-md px-2 border-y-2 h-12 rounded-l-md" />
-            <button type="submit" className='w-[20%] border-y-2 h-12 rounded-r-md bg-sky-300'>Enter</button>
+                value={name}
+                onChange={(event) => setName(event.target.value)}   
+                placeholder='Search for a Country'
+                className={`text-lightModeInput ${restart ? 'w-[70%]' : 'w-[80%]'} ${darkMode && 'bg-darkModeElements'} capitalize px-2 ${!darkMode && 'border-y-2 border-l-2'} ${!restart && 'rounded-l-md'} h-12`} />
+
+            <button type="submit" className={`w-[20%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-r-md bg-sky-300`}>Enter</button>
         </form>
             <main className="md:grid grid-cols-4 px-8 gap-6 rounded-md space-y-6 md:space-y-0">
               {elements}
