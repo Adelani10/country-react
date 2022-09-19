@@ -7,12 +7,10 @@ function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [countriesData, setCountriesData] = useState([])
   const [name, setName] = useState("")
-  const [search, setSearch] = useState(false)
   const [displayTheRest, setDisplayTheRest] = useState(true)
-  const [continueSearch, setContinueSearch] = useState(false)
 
   useEffect(()=> {
-                fetch( search ? `https://restcountries.com/v3.1/name/${name}` : 'https://restcountries.com/v3.1/all')
+                fetch( name ? `https://restcountries.com/v3.1/name/${name}` : 'https://restcountries.com/v3.1/all')
                   .then(res=> res.json())
                   .then(data => setCountriesData(data.map(item=> {
                     return {
@@ -29,7 +27,7 @@ function App() {
                       isInfoShown: false
       }
     })))
-}, [search, continueSearch])
+}, [name])
 
   const elements = countriesData.map((item, index) => {
     return <Country id={item.id}
@@ -100,31 +98,14 @@ function App() {
         </nav>
 
       <section className='px-4 flex flex-col space-y-6 pb-4 relative'>
-        <form 
-            onSubmit={(event)=> {
-              event.preventDefault()
-              setSearch(true)
-              setContinueSearch(prev=>!prev)
-            }}
-            className='w-full md:w-[50%] flex items-center rounded-md shadow-md'>
-
-
-             {search && <button 
-                  onClick={()=> {setSearch(false)
-                                    setName('')}} 
-                  className={`w-[10%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-l-md `}>
-                    <i className="fa-solid fa-angle-left"></i>
-            </button> }
-
-
+        <form className='w-full md:w-[50%] flex items-center rounded-md shadow-md'>
             <input 
                 type="text"
                 value={name}
                 onChange={(event) => setName(event.target.value)}   
                 placeholder='Search for a Country'
-                className={`text-lightModeInput tracking-widest ${search ? 'w-[70%]' : 'w-[80%]'} ${darkMode && 'bg-darkModeElements'}  px-2 ${!darkMode && 'border-y-2 border-l-2'} ${!search && 'rounded-l-md'} h-12`} />
+                className={`text-lightModeInput tracking-widest w-full ${darkMode && 'bg-darkModeElements'}  px-2 ${!darkMode && 'border-2'} rounded-md h-12`} />
 
-            <button type="submit" className={`w-[20%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-r-md bg-sky-300`}>Enter</button>
         </form>
             <main className="md:grid grid-cols-4 gap-6 rounded-md space-y-8 md:space-y-0">
               {elements}
