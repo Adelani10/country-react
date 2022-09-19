@@ -124,14 +124,14 @@ function App() {
             </button> }
 
 
-            <input 
+            {!restart && <input 
                 type="text"
                 value={name}
                 onChange={(event) => setName(event.target.value)}   
                 placeholder='Search (Capitalize first letter)'
-                className={`text-lightModeInput ${restart ? 'w-[70%]' : 'w-[80%]'} ${darkMode && 'bg-darkModeElements'} capitalize px-2 ${!darkMode && 'border-y-2 border-l-2'} ${!restart && 'rounded-l-md'} h-12`} />
+                className={`text-lightModeInput ${restart ? 'w-[70%]' : 'w-[80%]'} ${darkMode && 'bg-darkModeElements'}  px-2 ${!darkMode && 'border-y-2 border-l-2'} ${!restart && 'rounded-l-md'} h-12`} />}
 
-            <button type="submit" className={`w-[20%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-r-md bg-sky-300`}>Enter</button>
+            {!restart && <button type="submit" className={`w-[20%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-r-md bg-sky-300`}>Enter</button>}
         </form>
             <main className="md:grid grid-cols-4 gap-6 rounded-md space-y-8 md:space-y-0">
               {elements}
