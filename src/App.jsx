@@ -7,11 +7,12 @@ function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [countriesData, setCountriesData] = useState([])
   const [name, setName] = useState("")
-  const [restart, setRestart] = useState(false)
+  const [search, setSearch] = useState(false)
   const [displayTheRest, setDisplayTheRest] = useState(true)
+  const [continueSearch, setContinueSearch] = useState(false)
 
   useEffect(()=> {
-    if(!restart){fetch('https://restcountries.com/v3.1/all')
+                fetch( search ? `https://restcountries.com/v3.1/name/${name}` : 'https://restcountries.com/v3.1/all')
                   .then(res=> res.json())
                   .then(data => setCountriesData(data.map(item=> {
                     return {
@@ -28,7 +29,7 @@ function App() {
                       isInfoShown: false
       }
     })))
-  }}, [restart])
+}, [search, continueSearch])
 
   const elements = countriesData.map((item, index) => {
     return <Country id={item.id}
@@ -78,22 +79,10 @@ function App() {
       setCountriesData(countryReset)
     }
 
-
-  function searchCountry (event) {
-    event.preventDefault()
-    setRestart(true)
-      const newData = countriesData.filter(item => {
-      if(item.name == name){
-        return item
-      }
-    })
-    setCountriesData(newData)
-  }
-
   return (
     <div className={`App 
     ${darkMode ? 'bg-darkModeBackground text-darkModeTextAndLightModeElements' 
-                : 'text-lightModeText bg-lightModeBackground' }
+                : 'text-lightModeText bg-lightModeBackground border-2' }
                     space-y-4 container mx-auto min-h-screen`}>
 
       <nav className={`flex px-4
@@ -112,26 +101,30 @@ function App() {
 
       <section className='px-4 flex flex-col space-y-6 pb-4 relative'>
         <form 
-            onSubmit={searchCountry}
+            onSubmit={(event)=> {
+              event.preventDefault()
+              setSearch(true)
+              setContinueSearch(prev=>!prev)
+            }}
             className='w-full md:w-[50%] flex items-center rounded-md shadow-md'>
 
 
-             {restart && <button 
-                  onClick={()=> {setRestart(false)
+             {search && <button 
+                  onClick={()=> {setSearch(false)
                                     setName('')}} 
-                  className={`w-[10%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-l-md bg-red-600`}>
+                  className={`w-[10%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-l-md `}>
                     <i className="fa-solid fa-angle-left"></i>
             </button> }
 
 
-            {!restart && <input 
+            <input 
                 type="text"
                 value={name}
                 onChange={(event) => setName(event.target.value)}   
-                placeholder='Search (Capitalize first letter)'
-                className={`text-lightModeInput ${restart ? 'w-[70%]' : 'w-[80%]'} ${darkMode && 'bg-darkModeElements'}  px-2 ${!darkMode && 'border-y-2 border-l-2'} ${!restart && 'rounded-l-md'} h-12`} />}
+                placeholder='Search for a Country'
+                className={`text-lightModeInput tracking-widest ${search ? 'w-[70%]' : 'w-[80%]'} ${darkMode && 'bg-darkModeElements'}  px-2 ${!darkMode && 'border-y-2 border-l-2'} ${!search && 'rounded-l-md'} h-12`} />
 
-            {!restart && <button type="submit" className={`w-[20%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-r-md bg-sky-300`}>Enter</button>}
+            <button type="submit" className={`w-[20%] ${!darkMode && 'border-y-2 border-r-2'} h-12 rounded-r-md bg-sky-300`}>Enter</button>
         </form>
             <main className="md:grid grid-cols-4 gap-6 rounded-md space-y-8 md:space-y-0">
               {elements}
