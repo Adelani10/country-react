@@ -8,6 +8,7 @@ function App() {
   const [countriesData, setCountriesData] = useState([])
   const [name, setName] = useState("")
   const [restart, setRestart] = useState(false)
+  const [displayTheRest, setDisplayTheRest] = useState(true)
 
   useEffect(()=> {
     if(!restart){fetch('https://restcountries.com/v3.1/all')
@@ -45,10 +46,12 @@ function App() {
                     isClicked={isClicked}
                     darkMode={darkMode}
                     reset={reset}
+                    displayTheRest={displayTheRest}
                     />
   })
 
   function isClicked (id) {
+    setDisplayTheRest(false)
     const newArr = countriesData.map(item => {
         if(id === item.id){
           return {
@@ -61,6 +64,7 @@ function App() {
   }
 
   function reset(id) {
+    setDisplayTheRest(true)
       const countryReset = countriesData.map(item => {
             if(item.id === id){
                 return {
@@ -85,8 +89,6 @@ function App() {
     })
     setCountriesData(newData)
   }
-
-  console.log(name)
 
   return (
     <div className={`App 

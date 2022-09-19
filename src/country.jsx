@@ -4,21 +4,19 @@ import './index.css'
 
 
 export default function Country(props) {
-    const [show, setShow] = useState(false)
 
 
-    function handleInitialClick () {
-        setShow(true);
-        props.isClicked(props.id);
-    }
-
-
-    if(props.isInfoShown === false){
+    if(props.isInfoShown === false && props.displayTheRest){
          return (
-             <article onClick={handleInitialClick}
-                      className={`h-64 shadow-md w-full ${!props.darkMode && 'border'} ${props.darkMode && 'bg-darkModeElements'} ${show === true ? 'hidden': ''}`}>
-                    <img src={props.flag} alt="flag" className="w-full object-cover h-[60%] " />
-                    <div className="space-y-3 h-[40%] flex flex-col p-2 justify-center">
+             <article onClick={()=> props.isClicked(props.id)}
+                      className={`h-72 shadow-md w-full ${!props.darkMode && 'border'} ${props.darkMode && 'bg-darkModeElements'}`}>
+
+
+                        <div className="w-full h-[60%]">
+                            <img src={props.flag} alt="flag" className="w-full object-cover h-full " />
+                        </div>
+                    
+                    <div className="space-y-2 h-[40%] flex flex-col px-2 relative justify-center">
                         <h1 className="font-bold text-sm">
                             {props.name}
                         </h1>
@@ -33,6 +31,10 @@ export default function Country(props) {
                                 Capital : <span className="text-lightModeInput"> {props.capital}</span>
                             </h2>
                         </section>
+                        {props.isInfoShown === false && <button className=" absolute bottom-1/2 translate-y-1/2 right-3 text-zinc-400 font-semibold text-xs md:text-sm">
+                            <i className="fa-solid fa-angles-right"></i>
+                        </button>}
+                        
                     </div>
                 </article>
                 
@@ -45,7 +47,6 @@ export default function Country(props) {
             <div className={`${props.darkMode ? 'bg-darkModeElements' : 'bg-darkModeTextAndLightModeElements'}   overflow-hidden absolute w-full top-0 min-h-screen left-0 right-0 space-y-12 p-12 md:p-24`}>
                     <button 
                             onClick={()=> {
-                                setShow(false)
                                 props.reset(props.id)
                             }}
                             className="px-8 py-1 space-x-2 flex items-center border-2 hover:bg-sky-200">
@@ -88,28 +89,4 @@ export default function Country(props) {
                 </div>
         )
     }
-
-    // return (
-    //          <article onClick={()=> props.isClicked(props.id)} className={`h-64 shadow-md w-[75%] mx-auto
-    //                 ${props.darkMode && 'bg-darkModeElements'}`}>
-    //                 <img src={props.flag} alt="flag" className="w-full object-cover h-[40%] " />
-    //                 <div className="space-y-3 h-[65%] flex flex-col p-2 justify-center">
-    //                     <h1 className="font-semibold text-sm">
-    //                         {props.name}
-    //                     </h1>
-    //                     <section className="text-xs md:text-sm space-y-2">
-    //                         <h2 className="">
-    //                             Population : <span className="text-lightModeInput"> {props.population}</span>
-    //                         </h2>
-    //                         <h2 className="">
-    //                             Region : <span className="text-lightModeInput"> {props.region}</span>
-    //                         </h2>
-    //                         <h2 className="">
-    //                             Capital : <span className="text-lightModeInput"> {props.capital}</span>
-    //                         </h2>
-    //                     </section>
-    //                 </div>
-    //             </article>
-                
-    // )
 }
