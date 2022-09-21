@@ -11,10 +11,12 @@ function App() {
 
   useEffect(()=> {
                 fetch( !formData.country && !formData.region ? 'https://restcountries.com/v3.1/all' : 
-                !formData.region && formData.country ? `https://restcountries.com/v3.1/name/${formData.country}` : 
+                formData.country ? `https://restcountries.com/v3.1/name/${formData.country}` : 
                 formData.region && !formData.country ? `https://restcountries.com/v3.1/region/${formData.region}` : '')
                   .then(res=> res.json())
-                  .then(data => setCountriesData(data.map(item=> {
+                  .then(data => {
+                    console.log(data)
+                    setCountriesData(data.map(item=> {
                     return {
                       id: nanoid(),
                       name: item.name.common,
@@ -24,11 +26,11 @@ function App() {
                       capital: item.capital,
                       subregion: item.subregion,
                       flag: item.flags.svg,
-                      topLevel: item.tld,
-                      borderCountries: item.borders,
+                      topLevel: item.tld && item.tld.length > 0 ? item.tld.join(' | ') : 'NA',
+                      borderCountries: item.borders && item.borders.length > 0 ? item.borders.join(' | ') : 'NA',
                       isInfoShown: false
-      }
-    })))
+      }}))}
+  )
 }, [formData])
 
   const elements = countriesData.map((item, index) => {
@@ -122,8 +124,8 @@ function App() {
           <select 
                   name="region" 
                   onChange={handleChange} 
-                  className={`h-full w-[30%] md:w-[15%] px-1 text-center font-bold rounded-md ${darkMode && 'bg-darkModeElements'} ${!darkMode && 'border-2'} `}>
-                        <option value="Africa">--Region--</option>
+                  className={`h-full w-[30%] md:w-[15%] px-1 font-semibold rounded-md ${darkMode && 'bg-darkModeElements'} ${!darkMode && 'border-2'} `}>
+                        <option value="">Region</option>
                         <option value="Africa">Africa</option>
                         <option value="America">America</option>
                         <option value="Asia">Asia</option>

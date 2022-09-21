@@ -78,9 +78,8 @@ export default function Country(props) {
                                     
                             </article>
 
-                            <h3 className="w-full">Border Countries : 
-                                <span className="text-darkModeTextAndLightModeElements capitalize px-3 py-1 mx-2">
-                                {props.borderCountries && props.borderCountries.length > 1 ?  props.borderCountries.join(' , '): props.borderCountries ?  props.borderCountries : ''}</span>
+                            <h3 className="w-full capitalize py-1">
+                                Border Countries : {props.borderCountries}
                             </h3>
                         </div>
 
