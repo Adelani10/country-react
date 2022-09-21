@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import './index.css'
 
 
@@ -44,7 +43,7 @@ export default function Country(props) {
 
     if(props.isInfoShown){
         return (
-            <div className={`${props.darkMode ? 'bg-darkModeElements' : 'bg-darkModeTextAndLightModeElements'}   overflow-hidden absolute w-full top-0 min-h-screen left-0 right-0 space-y-12 p-12 md:p-24`}>
+            <div className={`${props.darkMode ? 'bg-darkModeElements' : 'bg-darkModeTextAndLightModeElements'} absolute w-full top-0 min-h-screen left-0 right-0 space-y-12 p-6 md:p-24`}>
                     <button 
                             onClick={()=> {
                                 props.reset(props.id)

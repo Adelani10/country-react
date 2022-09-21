@@ -6,11 +6,13 @@ import { nanoid } from 'nanoid'
 function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [countriesData, setCountriesData] = useState([])
-  const [name, setName] = useState("")
+  const [formData, setFormData] = useState({country: '', region:''})
   const [displayTheRest, setDisplayTheRest] = useState(true)
 
   useEffect(()=> {
-                fetch( name ? `https://restcountries.com/v3.1/name/${name}` : 'https://restcountries.com/v3.1/all')
+                fetch( !formData.country && !formData.region ? 'https://restcountries.com/v3.1/all' : 
+                !formData.region && formData.country ? `https://restcountries.com/v3.1/name/${formData.country}` : 
+                formData.region && !formData.country ? `https://restcountries.com/v3.1/region/${formData.region}` : '')
                   .then(res=> res.json())
                   .then(data => setCountriesData(data.map(item=> {
                     return {
@@ -27,7 +29,7 @@ function App() {
                       isInfoShown: false
       }
     })))
-}, [name])
+}, [formData])
 
   const elements = countriesData.map((item, index) => {
     return <Country id={item.id}
@@ -77,6 +79,16 @@ function App() {
       setCountriesData(countryReset)
     }
 
+  function handleChange(event) {
+    const {name, value} = event.target
+    setFormData(prev => {
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
+  }
+
   return (
     <div className={`App 
     ${darkMode ? 'bg-darkModeBackground text-darkModeTextAndLightModeElements' 
@@ -97,14 +109,27 @@ function App() {
             </button>
         </nav>
 
-      <section className='px-4 flex flex-col space-y-6 pb-4 relative'>
-        <form className='w-full md:w-[50%] flex items-center rounded-md shadow-md'>
+      <section className='px-4 flex flex-col h-full space-y-6 pb-4 relative'>
+        <form className='w-full h-12 flex justify-between items-center rounded-md'>
             <input 
                 type="text"
-                value={name}
-                onChange={(event) => setName(event.target.value)}   
-                placeholder='Search for a Country'
-                className={`text-lightModeInput tracking-widest w-full ${darkMode && 'bg-darkModeElements'}  px-2 ${!darkMode && 'border-2'} rounded-md h-12`} />
+                name='country'
+                value={formData.country}
+                onChange={handleChange}   
+                placeholder='Search a Country'
+                className={`text-lightModeInput tracking-tight w-[60%] md:w-1/2 ${darkMode && 'bg-darkModeElements'}  px-2 ${!darkMode && 'border-2'} rounded-md h-full`} />
+
+          <select 
+                  name="region" 
+                  onChange={handleChange} 
+                  className={`h-full w-[30%] md:w-[15%] px-1 text-center font-bold rounded-md ${darkMode && 'bg-darkModeElements'} ${!darkMode && 'border-2'} `}>
+                        <option value="Africa">--Region--</option>
+                        <option value="Africa">Africa</option>
+                        <option value="America">America</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Oceania">Oceania</option>
+          </select>
 
         </form>
             <main className="md:grid grid-cols-4 gap-6 rounded-md space-y-8 md:space-y-0">
