@@ -2,12 +2,14 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import Country from './country'
 import { nanoid } from 'nanoid'
+import Detail from './countryDetail'
+import {Link, Routes, Route} from "react-router-dom"
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [countriesData, setCountriesData] = useState([])
   const [formData, setFormData] = useState({country: '', region:''})
-  const [displayTheRest, setDisplayTheRest] = useState(true)
+  const [closeForm, setCloseForm] = useState(false)
 
   useEffect(()=> {
                 fetch( !formData.country && !formData.region ? 'https://restcountries.com/v3.1/all' : 
@@ -15,7 +17,6 @@ function App() {
                 formData.region && !formData.country ? `https://restcountries.com/v3.1/region/${formData.region}` : '')
                   .then(res=> res.json())
                   .then(data => {
-                    console.log(data)
                     setCountriesData(data.map(item=> {
                     return {
                       id: nanoid(),
@@ -24,62 +25,33 @@ function App() {
                       population: item.population,
                       region: item.region,
                       capital: item.capital,
-                      subregion: item.subregion,
                       flag: item.flags.svg,
-                      topLevel: item.tld && item.tld.length > 0 ? item.tld.join(' | ') : 'NA',
-                      borderCountries: item.borders && item.borders.length > 0 ? item.borders.join(' | ') : 'NA',
-                      isInfoShown: false
+                      tld: item.tld ? item.tld.join(" | ") : "N/A",
+                      subregion: item.subregion ? item.subregion : "N/A",
+                      currencies: item.currencies ? Object.keys(item.currencies).join(" | ") : '', 
+                      languages: item.languages ? Object.values(item.languages).join(" | ") : '',
+                      bc: item.borders ? item.borders.join(" | ") : "N/A",
       }}))}
   )
 }, [formData])
+
+function toggleForm () {
+  setCloseForm(!closeForm)
+}
+
 
   const elements = countriesData.map((item, index) => {
     return <Country id={item.id}
                     key={index}
                     name={item.name}
-                    nativeName={item.nativeName}
                     population={item.population}
                     region={item.region} 
-                    subregion={item.subregion}
                     flag={item.flag}
                     capital={item.capital}
-                    topLevel={item.topLevel}
-                    borderCountries={item.borderCountries}
-                    isInfoShown={item.isInfoShown}
-                    isClicked={isClicked}
                     darkMode={darkMode}
-                    reset={reset}
-                    displayTheRest={displayTheRest}
+                    toggleForm={toggleForm}
                     />
   })
-
-  function isClicked (id) {
-    setDisplayTheRest(false)
-    const newArr = countriesData.map(item => {
-        if(id === item.id){
-          return {
-            ...item, isInfoShown: true
-          }
-        }
-        return item
-    })
-    setCountriesData(newArr)
-  }
-
-  function reset(id) {
-    setDisplayTheRest(true)
-      const countryReset = countriesData.map(item => {
-            if(item.id === id){
-                return {
-                    ...item, isInfoShown: !item.isInfoShown
-                }
-            }
-            else {
-              return item
-            }
-        })
-      setCountriesData(countryReset)
-    }
 
   function handleChange(event) {
     const {name, value} = event.target
@@ -112,7 +84,7 @@ function App() {
         </nav>
 
       <section className='px-4 flex flex-col h-full space-y-6 pb-4 relative'>
-        <form className='w-full h-12 flex justify-between items-center rounded-md'>
+        {closeForm === false && <form className='w-full h-12 flex justify-between items-center rounded-md'>
             <input 
                 type="text"
                 name='country'
@@ -132,11 +104,20 @@ function App() {
                         <option value="Europe">Europe</option>
                         <option value="Oceania">Oceania</option>
           </select>
-
-        </form>
-            <main className="md:grid grid-cols-4 gap-6 rounded-md space-y-8 md:space-y-0">
+        </form>}
+        <Routes>
+          <Route 
+            exact 
+            path="/" 
+            element={<main className="md:grid md:grid-cols-4 md:gap-6 flex flex-col rounded-md space-y-8 md:space-y-0">
               {elements}
-            </main>
+            </main>} 
+          />
+          <Route path="/:countryId" element={<Detail 
+              countriesData={countriesData} 
+              darkMode={darkMode}
+              toggleForm={toggleForm}/>} />
+        </Routes>
       </section>
     </div>
   )
